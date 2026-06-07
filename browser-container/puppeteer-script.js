@@ -10,7 +10,7 @@ const io = new Server(server, { cors: { origin: '*' } });
 const PORT = 8080;
 
 (async () => {
-    console.log("🚀 Launching the hidden browser...");
+    console.log("Launching the hidden browser...");
     const browser = await puppeteer.launch({
         headless: true, 
         args: ['--no-sandbox', '--disable-setuid-sandbox'] // required for docker
@@ -20,10 +20,10 @@ const PORT = 8080;
     await page.setViewport({ width: 1024, height: 768 });
     await page.goto('https://github.com', { waitUntil: 'networkidle2' });
 
-    console.log("✅ Browser ready. Waiting for React frontend to connect...");
+    console.log("Browser ready. Waiting for React frontend to connect...");
 
     io.on('connection', (socket) => {
-        console.log('🟢 React App Connected!');
+        console.log('React App Connected!');
         
         socket.on('mouseClick', async ({ x, y }) => {
             try {
@@ -51,13 +51,13 @@ const PORT = 8080;
         }, 200);
 
         socket.on('disconnect', () => {
-            console.log('🔴 React App Disconnected!');
+            console.log('React App Disconnected!');
             clearInterval(streamInterval);
         });
     });
 
     // bind to 0.0.0.0 to make it accessible outside the docker container
     server.listen(PORT, '0.0.0.0', () => {
-        console.log(`📡 Streaming Server running on port ${PORT}`);
+        console.log(`Streaming Server running on port ${PORT}`);
     });
 })();
