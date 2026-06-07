@@ -18,7 +18,7 @@ const PORT = 8080;
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1024, height: 768 });
-    landing_page = 'https://www.teambld.in/'
+    landing_page = 'https://github.com';
     await page.goto(landing_page, { waitUntil: 'networkidle2' });
 
     console.log("Browser ready. Waiting for React frontend to connect...");
